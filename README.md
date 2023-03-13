@@ -2,7 +2,7 @@
 
 wip replay parser for osu!
 
-![](ezgif.com-crop.gif)
+![](https://cdn.discordapp.com/attachments/599688004654596108/1084671585614565386/ezgif.com-crop.gif)
 
 ### What does it do?
 
