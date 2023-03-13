@@ -10,14 +10,18 @@ This replay parser allows you to get information about an osu! replay (.osr file
 
 - Player username
 - Score information (score, max combo, 300s, etc.)
-- Exact time it was set (in UTC)
+- Exact time the score was set (in UTC)
 - Exact cursor positions and keypresses (including smoke)
 
 And more.
 
-As of right now, this program is not very user-friendly, but I'll be working to change that soon.
+(EDIT 12am March 13th): Replay viewer now creates a `Replay` object, allowing you to access a replay's attributes easier. You can also print the replay object, telling you all the information about the play. 
 
-The main functionality of this program right now is a real-time visualization of the user's cursor in a pygame window. Your mileage of this visualization may vary; the code is rendering frames to the screen up to every 60th of a second.
+Also, the cursor visualization is now a method (`draw_cursor()`),
+
+~~As of right now, this program is not very user-friendly, but I'll be working to change that soon.~~
+
+~~The main functionality of this program right now is a real-time visualization of the user's cursor in a pygame window. Your mileage of this visualization may vary; the code is rendering frames to the screen up to every 60th of a second.~~
 
 ### Requirements
 
@@ -26,33 +30,30 @@ The main functionality of this program right now is a real-time visualization of
 
 ### Usage
 
-Clone the repository:
-
-`git clone https://github.com/clarks03/replay-parser-testing.git`
-
-Download a replay you would like to get details for. Copy it, then cd into the repo:
-
-`cd replay-parser-testing`
-
-Then copy the replay file into this directory.
-
-Edit the file titled `replay_parser.py` in your text editor of choice. Then go to line 207:
+Create a new `Replay` object with the following code:
 
 ```python
-if __name__ == "__main__":
-
-    filename = "test.osr"  # this line
-    data = []
-    with open(filename, "rb") as file:
-        data = parse_data(file)
-    
-    gameplay_data = data[18]
-
-    get_data(gameplay_data)
+r = Replay("filename.osr")
 ```
 
-And replace the string `filename` with the name of your replay. Then run the file, and a window should pop up showing your replay cursor! The window will be black for a bit while the program calculates the frames, but it should begin playing after ~10 seconds (again, your mileage may vary.)
+You can print out the basics of the replay by printing the object:
 
-### Problems
+```python
+print(r)
+```
 
-This is a very WIP project that I worked on over a weekend for fun, so it's not perfect. Please be patient while I make it useable.
+And you can draw the cursor visualization with the following command:
+
+```python
+r.draw_cursor()
+```
+
+### TODO
+
+Unfortunately, the functionality of this replay parser isn't the most useful yet. Eventually, I want to be able to:
+
+- Get map data via. the Beatmap MD5 hash
+- Visualize hitcircles underneath the cursor
+- Optimize the cursor drawing, so that it plays a video rather than rendering the replay in real-time
+
+But for the time being, I think it's okay. I hope you get some use out of it :3 
