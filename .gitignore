@@ -1,3 +1,4 @@
-.osr
-.osz
+*.osr
+*.osz
 beatmap/
+*.gif
